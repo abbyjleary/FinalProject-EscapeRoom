@@ -1,0 +1,24 @@
+newmtl Frame_578aa463-ff7c-4b5a-96e5-42e3e77da21a
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Morion.jpg
+newmtl Material #21_84579099-2408-481e-b3f9-9f18a42fb7c6
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Classic_Handle_albedo.jpg
+newmtl Pano_dc3e3c1b-ce06-44ed-b676-105045c1f5cd
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Verona_PO_Morion_albedo.jpg
+newmtl Glass_26ba4f68-2730-46bf-82ba-3bc7c9526073
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Virazh_02_spec.jpg
+newmtl Metal_69cb48e5-4546-4c0d-9c07-34c6ecf52f27
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Classic_Handle_albedo.jpg
+newmtl Material #23_ddb09376-b62d-42a0-a4a5-49e87a7916d2
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Classic_Handle__roughness.jpg

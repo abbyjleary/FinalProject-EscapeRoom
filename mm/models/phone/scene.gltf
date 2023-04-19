@@ -1,0 +1,440 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 38115,
+      "max": [
+        0.08797832578420639,
+        0.20143349468708038,
+        0.09679780900478363
+      ],
+      "min": [
+        -0.10856711864471436,
+        -0.0717155933380127,
+        -0.04661410674452782
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 457380,
+      "componentType": 5126,
+      "count": 38115,
+      "max": [
+        0.9999983906745911,
+        0.9999977350234985,
+        0.9999982118606567
+      ],
+      "min": [
+        -0.9999991059303284,
+        -0.9999963641166687,
+        -0.9999985694885254
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 38115,
+      "max": [
+        0.9999988675117493,
+        0.9999695420265198,
+        0.999999463558197,
+        1.0
+      ],
+      "min": [
+        -0.999982476234436,
+        -0.999992311000824,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 38115,
+      "max": [
+        0.9990512728691101,
+        0.9989516139030457
+      ],
+      "min": [
+        0.0009487229981459677,
+        0.0009487229981459677
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 169803,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 914760,
+      "componentType": 5126,
+      "count": 31191,
+      "max": [
+        0.04542899131774902,
+        0.13753461837768555,
+        0.24704664945602417
+      ],
+      "min": [
+        -0.1565520316362381,
+        -0.2703590989112854,
+        -0.027836812660098076
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1289052,
+      "componentType": 5126,
+      "count": 31191,
+      "max": [
+        0.9999346137046814,
+        0.9999059438705444,
+        0.999948263168335
+      ],
+      "min": [
+        -0.9999908208847046,
+        -0.9997835159301758,
+        -0.9999901652336121
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 609840,
+      "componentType": 5126,
+      "count": 31191,
+      "max": [
+        0.9998784065246582,
+        0.9999380707740784,
+        0.999783992767334,
+        1.0
+      ],
+      "min": [
+        -0.9993423223495483,
+        -0.9999772906303406,
+        -0.9986302852630615,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 304920,
+      "componentType": 5126,
+      "count": 31191,
+      "max": [
+        0.9990686774253845,
+        0.9835422039031982
+      ],
+      "min": [
+        0.0022387849166989326,
+        0.0008599099819548428
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 679212,
+      "componentType": 5125,
+      "count": 158628,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Museum of Engineering and Technology, Krakow (https://sketchfab.com/mitkrakow)",
+      "license": "CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)",
+      "source": "https://sketchfab.com/3d-models/cb-35-telephone-9d3cb105a87a4cb4b79c5cfc093bd5fe",
+      "title": "CB-35 telephone"
+    },
+    "generator": "Sketchfab-13.18.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 1313724,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 554448,
+      "byteOffset": 1313724,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1663344,
+      "byteOffset": 1868172,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1108896,
+      "byteOffset": 3531516,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 4640412,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/telefon_baseColor.jpeg"
+    },
+    {
+      "uri": "textures/telefon_metallicRoughness.png"
+    },
+    {
+      "uri": "textures/telefon_normal.jpeg"
+    },
+    {
+      "uri": "textures/sluchawka_baseColor.jpeg"
+    },
+    {
+      "uri": "textures/sluchawka_metallicRoughness.png"
+    },
+    {
+      "uri": "textures/sluchawka_normal.jpeg"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "telefon",
+      "normalTexture": {
+        "index": 2
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "sluchawka",
+      "normalTexture": {
+        "index": 5
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 3
+        },
+        "metallicRoughnessTexture": {
+          "index": 4
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "TELEFON_telefon_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "SLUCHAWKA_sluchawka_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 6,
+            "POSITION": 5,
+            "TANGENT": 7,
+            "TEXCOORD_0": 8
+          },
+          "indices": 9,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "691.fbx"
+    },
+    {
+      "children": [
+        3,
+        5
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4
+      ],
+      "matrix": [
+        99.99999999997875,
+        -6.516827966151588e-05,
+        0.0,
+        0.0,
+        -1.0617260404688505e-11,
+        -1.629206793918314e-05,
+        -99.99999999999868,
+        0.0,
+        6.516827966151501e-05,
+        99.99999999997745,
+        -1.629206793918314e-05,
+        0.0,
+        -17.23440933227539,
+        4.203068256378174,
+        6.476990699768066,
+        1.0
+      ],
+      "name": "TELEFON"
+    },
+    {
+      "mesh": 0,
+      "name": "TELEFON_telefon_0"
+    },
+    {
+      "children": [
+        6
+      ],
+      "matrix": [
+        61.31465725902068,
+        -78.81237277304798,
+        -5.396545477520654,
+        0.0,
+        6.902827925511046,
+        -1.4599881107940194,
+        99.7507864698175,
+        0.0,
+        -78.69475059900506,
+        -61.53436708538138,
+        4.545095770380025,
+        0.0,
+        3.352346897125244,
+        3.112595558166504,
+        7.824522972106934,
+        1.0
+      ],
+      "name": "SLUCHAWKA"
+    },
+    {
+      "mesh": 1,
+      "name": "SLUCHAWKA_sluchawka_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    },
+    {
+      "sampler": 0,
+      "source": 3
+    },
+    {
+      "sampler": 0,
+      "source": 4
+    },
+    {
+      "sampler": 0,
+      "source": 5
+    }
+  ]
+}

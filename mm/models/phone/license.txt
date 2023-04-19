@@ -1,0 +1,11 @@
+Model Information:
+* title:	CB-35 telephone
+* source:	https://sketchfab.com/3d-models/cb-35-telephone-9d3cb105a87a4cb4b79c5cfc093bd5fe
+* author:	Museum of Engineering and Technology, Krakow (https://sketchfab.com/mitkrakow)
+
+Model License:
+* license type:	CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
+* requirements:	Author must be credited. No commercial use. Modified versions must have the same license.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "CB-35 telephone" (https://sketchfab.com/3d-models/cb-35-telephone-9d3cb105a87a4cb4b79c5cfc093bd5fe) by Museum of Engineering and Technology, Krakow (https://sketchfab.com/mitkrakow) licensed under CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)

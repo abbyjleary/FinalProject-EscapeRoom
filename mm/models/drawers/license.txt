@@ -1,0 +1,11 @@
+Model Information:
+* title:	Wooden Drawer
+* source:	https://sketchfab.com/3d-models/wooden-drawer-1b98e3b2106d4a319cef7281ca02e7a8
+* author:	Mkky (https://sketchfab.com/mkky)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Wooden Drawer" (https://sketchfab.com/3d-models/wooden-drawer-1b98e3b2106d4a319cef7281ca02e7a8) by Mkky (https://sketchfab.com/mkky) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
