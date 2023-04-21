@@ -104,7 +104,9 @@ void GLViewFinalProject::onResizeWindow(GLsizei width, GLsizei height)
 
 void GLViewFinalProject::onMouseDown(const SDL_MouseButtonEvent& e)
 {
-	GLView::onMouseDown(e);
+	if (closeText) {
+		GLView::onMouseDown(e);
+	}
 }
 
 
@@ -126,7 +128,7 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 	if (key.keysym.sym == SDLK_0)
 		this->setNumPhysicsStepsPerRender(1);
 
-	if (key.keysym.sym == SDLK_w)
+	if (key.keysym.sym == SDLK_w && closeText)
 	{
 		this->cam->moveInLookDirection();
 		this->cam->setPosition(this->cam->getPosition().x, this->cam->getPosition().y, 10);
@@ -134,7 +136,7 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 
 	}
 
-	if (key.keysym.sym == SDLK_s)
+	if (key.keysym.sym == SDLK_s && closeText)
 	{
 		this->cam->moveOppositeLookDirection();
 		this->cam->setPosition(this->cam->getPosition().x, this->cam->getPosition().y, 10);
@@ -142,7 +144,7 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 
 	}
 
-	if (key.keysym.sym == SDLK_a)
+	if (key.keysym.sym == SDLK_a && closeText)
 	{
 		this->cam->moveLeft();
 		collision(this->cam);
@@ -150,7 +152,7 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 
 	}
 
-	if (key.keysym.sym == SDLK_d)
+	if (key.keysym.sym == SDLK_d && closeText)
 	{
 		this->cam->moveRight();
 		collision(this->cam);
@@ -163,6 +165,24 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 
 	if (key.keysym.sym == SDLK_DOWN) {
 		this->cam->moveRelative(Vector(0, 0, -1));
+	}
+
+	if (key.keysym.sym == SDLK_RETURN) {
+		for (int i = 0; i < worldLst->size(); i++) {
+			if (this->worldLst->at(i)->getLabel() == "text0") {
+				this->worldLst->at(i)->isVisible = false;
+				closeText = 1;
+			}
+		}
+	}
+
+	if (key.keysym.sym == SDLK_0 && closeText) {
+		for (int i = 0; i < worldLst->size(); i++) {
+			if (this->worldLst->at(i)->getLabel() == "key") {
+			this->worldLst->at(i)->isVisible = true;
+			}
+		}
+		
 	}
 }
 
@@ -182,10 +202,11 @@ void Aftr::GLViewFinalProject::loadMap()
 	ManagerOpenGLState::GL_CLIPPING_PLANE = 1000.0;
 	ManagerOpenGLState::GL_NEAR_PLANE = 0.1f;
 	ManagerOpenGLState::enableFrustumCulling = false;
-	Axes::isVisible = true;
+	Axes::isVisible = false;
 	this->glRenderer->isUsingShadowMapping(true); //set to TRUE to enable shadow mapping, must be using GL 3.2+
 
-	this->cam->setPosition(0, 0, 10);
+	this->cam->setPosition(0, -11, 10);
+	this->cam->rotateAboutGlobalZ(90.0f * DEGtoRAD);
 	lastPos = cam->getPosition();
 
 	std::string shinyRedPlasticCube(ManagerEnvironmentConfiguration::getSMM() + "/models/cube4x4x4redShinyPlastic_pp.wrl");
@@ -372,7 +393,7 @@ void Aftr::GLViewFinalProject::loadMap()
 		//desk
 	{
 		WO* wo = WO::New("../mm/models/desk/scene.gltf", Vector(1.2, 1.2, 1.2), MESH_SHADING_TYPE::mstSMOOTH);
-		wo->setPosition(Vector(12, 0, 3.9));
+		wo->setPosition(Vector(12, 5, 3.9));
 		wo->rotateAboutGlobalZ(-90.0f * DEGtoRAD);
 		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
 
@@ -399,7 +420,7 @@ void Aftr::GLViewFinalProject::loadMap()
 	//desk books
 	{
 		WO* wo = WO::New("../mm/models/books/books.obj", Vector(0.003, 0.003, 0.003), MESH_SHADING_TYPE::mstSMOOTH);
-		wo->setPosition(Vector(11.25, 0, 7));
+		wo->setPosition(Vector(11.25, 5, 7));
 		wo->rotateAboutGlobalZ(90.0f * DEGtoRAD);
 		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
 		worldLst->push_back(wo);
@@ -408,7 +429,7 @@ void Aftr::GLViewFinalProject::loadMap()
 	//desk chair
 	{
 		WO* wo = WO::New("../mm/models/chair2/scene.gltf", Vector(0.0215, 0.0215, 0.0215), MESH_SHADING_TYPE::mstSMOOTH);
-		wo->setPosition(Vector(9.5, 0.245, 5.05));
+		wo->setPosition(Vector(9.5, 5.245, 5.05));
 		wo->rotateAboutGlobalZ(77.5f * DEGtoRAD);
 		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
 		worldLst->push_back(wo);
@@ -417,7 +438,7 @@ void Aftr::GLViewFinalProject::loadMap()
 	//desk lamp
 	{
 		WO* wo = WO::New("../mm/models/lamp/scene.gltf", Vector(0.04, 0.04, 0.04), MESH_SHADING_TYPE::mstSMOOTH);
-		wo->setPosition(Vector(12.5, -2.7, 8));
+		wo->setPosition(Vector(12.5, 2.3, 8));
 		wo->rotateAboutGlobalZ(125.0f * DEGtoRAD);
 		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
 		worldLst->push_back(wo);
@@ -426,7 +447,7 @@ void Aftr::GLViewFinalProject::loadMap()
 	//phone
 	{
 		WO* wo = WO::New("../mm/models/phone/scene.gltf", Vector(0.08, 0.08, 0.08), MESH_SHADING_TYPE::mstSMOOTH);
-		wo->setPosition(Vector(12, 3, 7.35));
+		wo->setPosition(Vector(12, 8, 7.35));
 		wo->rotateAboutGlobalZ(-35.0f * DEGtoRAD);
 		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
 		worldLst->push_back(wo);
@@ -434,17 +455,68 @@ void Aftr::GLViewFinalProject::loadMap()
 
 	//starting text
 	{
-		
+		WO* wo = WO::New("../mm/models/startup-text/startup-text.obj", Vector(0.02, 0.02, 0.02), MESH_SHADING_TYPE::mstSMOOTH);
+		wo->setPosition(Vector(0, 0, 10));
+		wo->setLabel("text0");
+		//wo->rotateAboutGlobalZ(-35.0f * DEGtoRAD);
+		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
+		worldLst->push_back(wo);
 	}
 
-	////phone
-	//{
-	//	WO* wo = WO::New("../mm/models/phone/scene.gltf", Vector(0.08, 0.08, 0.08), MESH_SHADING_TYPE::mstSMOOTH);
-	//	wo->setPosition(Vector(12, 3, 7.35));
-	//	wo->rotateAboutGlobalZ(-35.0f * DEGtoRAD);
-	//	wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
-	//	worldLst->push_back(wo);
-	//}
+	//key
+	{
+		WO* wo = WO::New("../mm/models/key/scene.gltf", Vector(0.001, 0.001, 0.001), MESH_SHADING_TYPE::mstSMOOTH);
+		wo->setPosition(Vector(-8.5, 7.5 , 4.2));
+		wo->rotateAboutGlobalX(90.0f * DEGtoRAD);
+		wo->rotateAboutGlobalZ(23.5f * DEGtoRAD);
+		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
+		wo->isVisible = false;
+		wo->setLabel("key");
+		worldLst->push_back(wo);
+	}
+
+	//switch
+	{
+		WO* wo = WO::New("../mm/models/switch/scene.gltf", Vector(1, 1, 1), MESH_SHADING_TYPE::mstSMOOTH);
+		wo->setPosition(Vector(3, -13.5, 4.2));
+		//wo->rotateAboutGlobalX(90.0f * DEGtoRAD);
+		wo->rotateAboutGlobalZ(180.0f * DEGtoRAD);
+		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
+		wo->setLabel("switch");
+		worldLst->push_back(wo);
+	}
+
+	//armchair
+	{
+		WO* wo = WO::New("../mm/models/chair3/scene.gltf", Vector(0.035, 0.035, 0.035), MESH_SHADING_TYPE::mstSMOOTH);
+		wo->setPosition(Vector(-7, -9, 6));
+		//wo->rotateAboutGlobalX(90.0f * DEGtoRAD);
+		wo->rotateAboutGlobalZ(53.5f * DEGtoRAD);
+		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
+		worldLst->push_back(wo);
+	}
+
+	//armchair2
+	{
+		WO* wo = WO::New("../mm/models/chair3/scene.gltf", Vector(0.035, 0.035, 0.035), MESH_SHADING_TYPE::mstSMOOTH);
+		wo->setPosition(Vector(7, -9, 6));
+		//wo->rotateAboutGlobalX(90.0f * DEGtoRAD);
+		wo->rotateAboutGlobalZ(140.5f * DEGtoRAD);
+		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
+		worldLst->push_back(wo);
+	}
+
+
+	//small table
+	{
+		WO* wo = WO::New("../mm/models/small-table/scene.gltf", Vector(0.6, 0.6, 0.6), MESH_SHADING_TYPE::mstSMOOTH);
+		wo->setPosition(Vector(0, -10, 4));
+		//wo->rotateAboutGlobalX(90.0f * DEGtoRAD);
+		wo->rotateAboutGlobalZ(140.5f * DEGtoRAD);
+		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
+		worldLst->push_back(wo);
+	}
+
 
 	//{
 	//	//chair
