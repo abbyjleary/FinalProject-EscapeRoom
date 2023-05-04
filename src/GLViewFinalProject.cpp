@@ -93,6 +93,11 @@ void GLViewFinalProject::updateWorld()
 	GLView::updateWorld(); //Just call the parent's update world first.
 	//If you want to add additional functionality, do it after
 	//this call.
+	for (int i = 0; i < worldLst->size(); i++) {
+		if (worldLst->at(i)->getLabel() == "hint1") {
+			worldLst->at(i)->setPosition(Vector(cam->getLookDirection().x, cam->getLookDirection().y, cam->getLookDirection().z));
+		}
+	}
 }
 
 
@@ -104,13 +109,13 @@ void GLViewFinalProject::onResizeWindow(GLsizei width, GLsizei height)
 
 void GLViewFinalProject::onMouseDown(const SDL_MouseButtonEvent& e)
 {
-	if (closeText) {
+	if (closeText && !gameOver) {
 		GLView::onMouseDown(e);
 
 		
 			onMouseDownSelection(e.x, e.y, *cam);
 			WO* wo = getLastSelectedWO();
-			if (wo->getLabel() == "switch" && keyDrop == 0) {
+			if (wo->getLabel() == "switch" && keyDrop == 0 && !gameOver) {
 				keyDrop = 1;
 				for (int i = 0; i < worldLst->size(); i++) {
 					if (this->worldLst->at(i)->getLabel() == "key") {
@@ -120,7 +125,7 @@ void GLViewFinalProject::onMouseDown(const SDL_MouseButtonEvent& e)
 				}
 			}
 
-			if (wo->getLabel() == "key" && keyDrop == 1 && haveKey == 0) {
+			if (wo->getLabel() == "key" && keyDrop == 1 && haveKey == 0 && !gameOver) {
 				haveKey = 1;
 				for (int i = 0; i < worldLst->size(); i++) {
 					if (this->worldLst->at(i)->getLabel() == "key") {
@@ -130,6 +135,9 @@ void GLViewFinalProject::onMouseDown(const SDL_MouseButtonEvent& e)
 				}
 			}
 
+			if (wo->getLabel() == "door" && keyDrop == 1 && haveKey == 1 && !gameOver) {
+				gameOver = 1;
+			}
 		
 	}
 }
@@ -153,7 +161,7 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 	if (key.keysym.sym == SDLK_0)
 		this->setNumPhysicsStepsPerRender(1);
 
-	if (key.keysym.sym == SDLK_w && closeText)
+	if (key.keysym.sym == SDLK_w && closeText && !gameOver)
 	{
 		this->cam->moveInLookDirection();
 		this->cam->setPosition(this->cam->getPosition().x, this->cam->getPosition().y, 10);
@@ -161,7 +169,7 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 
 	}
 
-	if (key.keysym.sym == SDLK_s && closeText)
+	if (key.keysym.sym == SDLK_s && closeText && !gameOver)
 	{
 		this->cam->moveOppositeLookDirection();
 		this->cam->setPosition(this->cam->getPosition().x, this->cam->getPosition().y, 10);
@@ -169,7 +177,7 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 
 	}
 
-	if (key.keysym.sym == SDLK_a && closeText)
+	if (key.keysym.sym == SDLK_a && closeText && !gameOver)
 	{
 		this->cam->moveLeft();
 		collision(this->cam);
@@ -177,22 +185,22 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 
 	}
 
-	if (key.keysym.sym == SDLK_d && closeText)
+	if (key.keysym.sym == SDLK_d && closeText && !gameOver)
 	{
 		this->cam->moveRight();
 		collision(this->cam);
 
 	}
 
-	if (key.keysym.sym == SDLK_UP) {
-		this->cam->moveRelative(Vector(0, 0, 1));
-	}
+	//if (key.keysym.sym == SDLK_UP) {
+	//	this->cam->moveRelative(Vector(0, 0, 1));
+	//}
 
-	if (key.keysym.sym == SDLK_DOWN) {
-		this->cam->moveRelative(Vector(0, 0, -1));
-	}
+	//if (key.keysym.sym == SDLK_DOWN) {
+	//	this->cam->moveRelative(Vector(0, 0, -1));
+	//}
 
-	if (key.keysym.sym == SDLK_RETURN) {
+	if (key.keysym.sym == SDLK_RETURN && keyDrop == 0 && haveKey == 0 && closeText == 0 && !gameOver) {
 		for (int i = 0; i < worldLst->size(); i++) {
 			if (this->worldLst->at(i)->getLabel() == "text0") {
 				this->worldLst->at(i)->isVisible = false;
@@ -200,6 +208,27 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 			}
 		}
 	}
+
+	if (key.keysym.sym == SDLK_1 && closeText && !gameOver) {
+		for (int i = 0; i < worldLst->size(); i++) {
+			if (worldLst->at(i)->getLabel() == "hint1") {
+				worldLst->at(i)->isVisible = true;
+				closeText = 0;
+
+			}
+		}
+	}
+
+	if (key.keysym.sym == SDLK_RETURN && keyDrop == 0 && haveKey == 0 && closeText == 1 && gameOver == 0) {
+		for (int i = 0; i < worldLst->size(); i++) {
+			if (worldLst->at(i)->getLabel() == "hint1") {
+				//worldLst->at(i)->isVisible = false;
+				closeText = 1;
+
+			}
+		}
+	}
+
 }
 
 
@@ -395,15 +424,7 @@ void Aftr::GLViewFinalProject::loadMap()
 		WO* wo = WO::New("../mm/models/door/door.obj", Vector(.007, .007, .007), MESH_SHADING_TYPE::mstSMOOTH);
 		wo->setPosition(Vector(0, 14.45, 8));
 		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
-		
-		wo->upon_async_model_loaded([wo]()
-			{
-				
-		//		ModelMeshSkin floorSkin(ManagerTex::loadTexAsync("../mm/images/Verona_PO_Morion_albedo.jpg").value());
-		//floorSkin.setMeshShadingType(MESH_SHADING_TYPE::mstSMOOTH);
-		//wo->getModel()->getModelDataShared()->getModelMeshes().at(0)->getSkins().at(0) = std::move(floorSkin);
-			}
-		);
+		wo->setLabel("door");
 		worldLst->push_back(wo);
 	}
 
@@ -477,6 +498,18 @@ void Aftr::GLViewFinalProject::loadMap()
 		wo->setLabel("text0");
 		//wo->rotateAboutGlobalZ(-35.0f * DEGtoRAD);
 		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
+		worldLst->push_back(wo);
+	}
+
+	//hint1
+	{
+		WO* wo = WO::New("../mm/models/hint1/hint1.obj", Vector(0.02, 0.02, 0.02), MESH_SHADING_TYPE::mstSMOOTH);
+		//wo->setPosition(Vector(cam->getPosition().x, cam->getPosition().y, cam->getPosition().z));
+		wo->setPosition(cam->getLookDirection());
+		wo->setLabel("hint1");
+		//wo->rotateAboutGlobalZ(-35.0f * DEGtoRAD);
+		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
+		wo->isVisible = 0;
 		worldLst->push_back(wo);
 	}
 
@@ -724,4 +757,5 @@ void GLViewFinalProject::collision(Aftr::Camera* cam)
 
 	lastPos = cam->getPosition();
 }
+
 
