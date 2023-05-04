@@ -106,6 +106,31 @@ void GLViewFinalProject::onMouseDown(const SDL_MouseButtonEvent& e)
 {
 	if (closeText) {
 		GLView::onMouseDown(e);
+
+		
+			onMouseDownSelection(e.x, e.y, *cam);
+			WO* wo = getLastSelectedWO();
+			if (wo->getLabel() == "switch" && keyDrop == 0) {
+				keyDrop = 1;
+				for (int i = 0; i < worldLst->size(); i++) {
+					if (this->worldLst->at(i)->getLabel() == "key") {
+						this->worldLst->at(i)->isVisible = true;
+						
+					}
+				}
+			}
+
+			if (wo->getLabel() == "key" && keyDrop == 1 && haveKey == 0) {
+				haveKey = 1;
+				for (int i = 0; i < worldLst->size(); i++) {
+					if (this->worldLst->at(i)->getLabel() == "key") {
+						this->worldLst->at(i)->isVisible = false;
+
+					}
+				}
+			}
+
+		
 	}
 }
 
@@ -175,15 +200,6 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 			}
 		}
 	}
-
-	if (key.keysym.sym == SDLK_0 && closeText) {
-		for (int i = 0; i < worldLst->size(); i++) {
-			if (this->worldLst->at(i)->getLabel() == "key") {
-			this->worldLst->at(i)->isVisible = true;
-			}
-		}
-		
-	}
 }
 
 
@@ -204,6 +220,7 @@ void Aftr::GLViewFinalProject::loadMap()
 	ManagerOpenGLState::enableFrustumCulling = false;
 	Axes::isVisible = false;
 	this->glRenderer->isUsingShadowMapping(true); //set to TRUE to enable shadow mapping, must be using GL 3.2+
+	//SDL_Texture *tex = IMG_LoadTexture(this->glRenderer, "")
 
 	this->cam->setPosition(0, -11, 10);
 	this->cam->rotateAboutGlobalZ(90.0f * DEGtoRAD);
