@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GLView.h"
+#include "Mat4.h"
 
 namespace Aftr
 {
@@ -35,6 +36,15 @@ public:
    virtual void collision(Aftr::Camera* cam);
    bool closeText = 0;
    Vector lastPos;
+   Vector lastLookDir;
+   Aftr::Mat4 lastPose;
+   bool keyDrop = 0;
+   bool haveKey = 0;
+   bool gameOver = 0;
+   bool start = 0;
+   bool hint1 = 0;
+   bool hint2 = 0;
+   bool hint = 0;
 
 protected:
    GLViewFinalProject( const std::vector< std::string >& args );

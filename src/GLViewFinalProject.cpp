@@ -98,6 +98,7 @@ void GLViewFinalProject::updateWorld()
 			worldLst->at(i)->setPosition(Vector(cam->getLookDirection().x, cam->getLookDirection().y, cam->getLookDirection().z));
 		}
 	}
+
 }
 
 
@@ -109,7 +110,7 @@ void GLViewFinalProject::onResizeWindow(GLsizei width, GLsizei height)
 
 void GLViewFinalProject::onMouseDown(const SDL_MouseButtonEvent& e)
 {
-	if (closeText && !gameOver) {
+	if (closeText && !gameOver && !hint) {
 		GLView::onMouseDown(e);
 
 		
@@ -138,6 +139,7 @@ void GLViewFinalProject::onMouseDown(const SDL_MouseButtonEvent& e)
 			if (wo->getLabel() == "door" && keyDrop == 1 && haveKey == 1 && !gameOver) {
 				gameOver = 1;
 			}
+
 		
 	}
 }
@@ -161,15 +163,15 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 	if (key.keysym.sym == SDLK_0)
 		this->setNumPhysicsStepsPerRender(1);
 
-	if (key.keysym.sym == SDLK_w && closeText && !gameOver)
+	if (key.keysym.sym == SDLK_w && closeText && !gameOver && !hint)
 	{
 		this->cam->moveInLookDirection();
 		this->cam->setPosition(this->cam->getPosition().x, this->cam->getPosition().y, 10);
-		collision(this->cam);
+		//collision(this->cam);
 
 	}
 
-	if (key.keysym.sym == SDLK_s && closeText && !gameOver)
+	if (key.keysym.sym == SDLK_s && closeText && !gameOver &&!hint)
 	{
 		this->cam->moveOppositeLookDirection();
 		this->cam->setPosition(this->cam->getPosition().x, this->cam->getPosition().y, 10);
@@ -177,7 +179,7 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 
 	}
 
-	if (key.keysym.sym == SDLK_a && closeText && !gameOver)
+	if (key.keysym.sym == SDLK_a && closeText && !gameOver &&!hint)
 	{
 		this->cam->moveLeft();
 		collision(this->cam);
@@ -185,7 +187,7 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 
 	}
 
-	if (key.keysym.sym == SDLK_d && closeText && !gameOver)
+	if (key.keysym.sym == SDLK_d && closeText && !gameOver && !hint)
 	{
 		this->cam->moveRight();
 		collision(this->cam);
@@ -200,34 +202,67 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 	//	this->cam->moveRelative(Vector(0, 0, -1));
 	//}
 
-	if (key.keysym.sym == SDLK_RETURN && keyDrop == 0 && haveKey == 0 && closeText == 0 && !gameOver) {
+	if (key.keysym.sym == SDLK_RETURN && keyDrop == 0 && haveKey == 0 && closeText == 0 && !gameOver && start == 0 && !hint) {
 		for (int i = 0; i < worldLst->size(); i++) {
 			if (this->worldLst->at(i)->getLabel() == "text0") {
 				this->worldLst->at(i)->isVisible = false;
 				closeText = 1;
+				start = 1;
 			}
 		}
 	}
 
-	if (key.keysym.sym == SDLK_1 && closeText && !gameOver) {
-		for (int i = 0; i < worldLst->size(); i++) {
-			if (worldLst->at(i)->getLabel() == "hint1") {
-				worldLst->at(i)->isVisible = true;
-				closeText = 0;
 
-			}
-		}
+	if (key.keysym.sym == SDLK_1 && closeText && !gameOver && !hint && !keyDrop) {
+		//for (int i = 0; i < worldLst->size(); i++) {
+		//	if (worldLst->at(i)->getLabel() == "hint1") {
+		//		worldLst->at(i)->isVisible = true;
+		//		closeText = 0;
+
+		//	}
+		//}
+		lastPose = cam->getPose();
+		cam->setPosition(0, 29, 10);
+		cam->rotateToIdentity();
+		this->cam->rotateAboutGlobalZ(-90.0f * DEGtoRAD);
+
+		hint1 = 1;
+		hint = 1;
 	}
 
-	if (key.keysym.sym == SDLK_RETURN && keyDrop == 0 && haveKey == 0 && closeText == 1 && gameOver == 0) {
-		for (int i = 0; i < worldLst->size(); i++) {
-			if (worldLst->at(i)->getLabel() == "hint1") {
-				//worldLst->at(i)->isVisible = false;
-				closeText = 1;
-
-			}
-		}
+	if (key.keysym.sym == SDLK_RETURN && keyDrop == 0 && haveKey == 0 && closeText == 1 && gameOver == 0 && hint1 == 1) {
+		cam->setPose(lastPose);
+		hint1 = 0;
+		hint = 0;
 	}
+
+	if (key.keysym.sym == SDLK_1 && closeText && !gameOver && !hint && keyDrop && !haveKey) {
+		//for (int i = 0; i < worldLst->size(); i++) {
+		//	if (worldLst->at(i)->getLabel() == "hint1") {
+		//		worldLst->at(i)->isVisible = true;
+		//		closeText = 0;
+
+		//	}
+		//}
+		lastPose = cam->getPose();
+		cam->setPosition(0, 39, 10);
+		cam->rotateToIdentity();
+		this->cam->rotateAboutGlobalZ(-90.0f * DEGtoRAD);
+
+		hint2 = 1;
+		hint = 1;
+	}
+
+	if (key.keysym.sym == SDLK_RETURN && keyDrop == 1 && haveKey == 0 && closeText == 1 && gameOver == 0 && hint2 == 1) {
+		cam->setPose(lastPose);
+		hint2 = 0;
+		hint = 0;
+	}
+
+	if (key.keysym.sym == SDLK_8) {
+		std::cout << cam->getPose().toString() << std::endl;
+	}
+
 
 }
 
@@ -564,6 +599,34 @@ void Aftr::GLViewFinalProject::loadMap()
 		//wo->rotateAboutGlobalX(90.0f * DEGtoRAD);
 		wo->rotateAboutGlobalZ(140.5f * DEGtoRAD);
 		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
+		worldLst->push_back(wo);
+	}
+
+	{
+		WO* wo = WO::New(shinyRedPlasticCube, Vector(6, 0.1, 6), MESH_SHADING_TYPE::mstFLAT);
+		wo->setPosition(Vector(0, 20, 10));
+		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
+		wo->upon_async_model_loaded([wo]()
+			{
+				ModelMeshSkin floorSkin(ManagerTex::loadTexAsync("../mm/images/hint1.png").value());
+				floorSkin.setMeshShadingType(MESH_SHADING_TYPE::mstFLAT);
+				wo->getModel()->getModelDataShared()->getModelMeshes().at(0)->getSkins().at(0) = std::move(floorSkin);
+			}
+		);
+		worldLst->push_back(wo);
+	}
+
+	{
+		WO* wo = WO::New(shinyRedPlasticCube, Vector(6, 0.1, 6), MESH_SHADING_TYPE::mstFLAT);
+		wo->setPosition(Vector(0, 30, 10));
+		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
+		wo->upon_async_model_loaded([wo]()
+			{
+				ModelMeshSkin floorSkin(ManagerTex::loadTexAsync("../mm/images/hint2.png").value());
+				floorSkin.setMeshShadingType(MESH_SHADING_TYPE::mstFLAT);
+				wo->getModel()->getModelDataShared()->getModelMeshes().at(0)->getSkins().at(0) = std::move(floorSkin);
+			}
+		);
 		worldLst->push_back(wo);
 	}
 
