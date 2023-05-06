@@ -545,7 +545,7 @@ void Aftr::GLViewFinalProject::loadMap()
 	//starting text
 	{
 		WO* wo = WO::New("../mm/models/startup-text/startup-text.obj", Vector(0.02, 0.02, 0.02), MESH_SHADING_TYPE::mstSMOOTH);
-		wo->setPosition(Vector(0, 3, 10));
+		wo->setPosition(Vector(0, 4, 10));
 		wo->setLabel("text0");
 		//wo->rotateAboutGlobalZ(-35.0f * DEGtoRAD);
 		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
