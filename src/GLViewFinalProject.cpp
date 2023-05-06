@@ -138,6 +138,20 @@ void GLViewFinalProject::onMouseDown(const SDL_MouseButtonEvent& e)
 
 			if (wo->getLabel() == "door" && keyDrop == 1 && haveKey == 1 && !gameOver) {
 				gameOver = 1;
+				cam->setPosition(0, 2, 10);
+				cam->rotateToIdentity();
+				this->cam->rotateAboutGlobalZ(90.0f * DEGtoRAD);
+				for (int i = 0; i < worldLst->size(); i++) {
+					if (worldLst->at(i)->getLabel() == "open-door") {
+						worldLst->at(i)->isVisible = true;
+					}
+					if (worldLst->at(i)->getLabel() == "door") {
+						worldLst->at(i)->isVisible = false;
+					}
+					if (worldLst->at(i)->getLabel() == "game-over") {
+						worldLst->at(i)->isVisible = true;
+					}
+				}
 			}
 
 		
@@ -167,7 +181,7 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 	{
 		this->cam->moveInLookDirection();
 		this->cam->setPosition(this->cam->getPosition().x, this->cam->getPosition().y, 10);
-		//collision(this->cam);
+		collision(this->cam);
 
 	}
 
@@ -259,10 +273,12 @@ void GLViewFinalProject::onKeyDown(const SDL_KeyboardEvent& key)
 		hint = 0;
 	}
 
-	if (key.keysym.sym == SDLK_8) {
-		std::cout << cam->getPose().toString() << std::endl;
-	}
-
+	//if (key.keysym.sym == SDLK_8) {
+	//	gameOver = 1;
+	//	cam->setPosition(0, 2, 10);
+	//	cam->rotateToIdentity();
+	//	this->cam->rotateAboutGlobalZ(90.0f * DEGtoRAD);
+	//}
 
 }
 
@@ -286,7 +302,7 @@ void Aftr::GLViewFinalProject::loadMap()
 	this->glRenderer->isUsingShadowMapping(true); //set to TRUE to enable shadow mapping, must be using GL 3.2+
 	//SDL_Texture *tex = IMG_LoadTexture(this->glRenderer, "")
 
-	this->cam->setPosition(0, -11, 10);
+	this->cam->setPosition(0, -4, 10);
 	this->cam->rotateAboutGlobalZ(90.0f * DEGtoRAD);
 	lastPos = cam->getPosition();
 
@@ -529,7 +545,7 @@ void Aftr::GLViewFinalProject::loadMap()
 	//starting text
 	{
 		WO* wo = WO::New("../mm/models/startup-text/startup-text.obj", Vector(0.02, 0.02, 0.02), MESH_SHADING_TYPE::mstSMOOTH);
-		wo->setPosition(Vector(0, 0, 10));
+		wo->setPosition(Vector(0, 3, 10));
 		wo->setLabel("text0");
 		//wo->rotateAboutGlobalZ(-35.0f * DEGtoRAD);
 		wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
@@ -602,6 +618,29 @@ void Aftr::GLViewFinalProject::loadMap()
 		worldLst->push_back(wo);
 	}
 
+	//open door
+{
+	WO* wo = WO::New("../mm/models/open-door/open-door.obj", Vector(.007, .007, .007), MESH_SHADING_TYPE::mstSMOOTH);
+	wo->setPosition(Vector(0, 12.6, 8));
+	wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
+	wo->setLabel("open-door");
+	wo->isVisible = false;
+	worldLst->push_back(wo);
+}
+
+
+//game over text
+{
+	WO* wo = WO::New("../mm/models/game-over/game-over.obj", Vector(0.02, 0.02, 0.02), MESH_SHADING_TYPE::mstSMOOTH);
+	wo->setPosition(Vector(0, 8, 10));
+	wo->setLabel("game-over");
+	wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
+	wo->isVisible = false;
+	worldLst->push_back(wo);
+}
+
+
+	//hint1
 	{
 		WO* wo = WO::New(shinyRedPlasticCube, Vector(6, 0.1, 6), MESH_SHADING_TYPE::mstFLAT);
 		wo->setPosition(Vector(0, 20, 10));
@@ -616,6 +655,7 @@ void Aftr::GLViewFinalProject::loadMap()
 		worldLst->push_back(wo);
 	}
 
+	//hint2
 	{
 		WO* wo = WO::New(shinyRedPlasticCube, Vector(6, 0.1, 6), MESH_SHADING_TYPE::mstFLAT);
 		wo->setPosition(Vector(0, 30, 10));
@@ -802,21 +842,39 @@ void GLViewFinalProject::collision(Aftr::Camera* cam)
 		cam->setPosition(lastPos);
 	}
 
-	if (cam->getPosition().x > 9 && cam->getPosition().y > -6 && cam->getPosition().y < 6) {
+	if (cam->getPosition().x > 9 && cam->getPosition().y > -1 && cam->getPosition().y < 11) {
 		cam->setPosition(lastPos);
 	}
 
-	if (cam->getPosition().x > 6 && cam->getPosition().y > -2 && cam->getPosition().y < 3) {
+	if (cam->getPosition().x > 6 && cam->getPosition().y > 3 && cam->getPosition().y < 8) {
 		cam->setPosition(lastPos);
 	}
 
+	//desk
 	if (cam->getPosition().x < -8 && cam->getPosition().y > -1) {
 		cam->setPosition(lastPos);
 	}
 
+	//desk chair
 	if (cam->getPosition().x < -7 && cam->getPosition().y > 5 && cam->getPosition().y < 9) {
 		cam->setPosition(lastPos);
 	}
+
+	//small table
+	if (cam->getPosition().x < 2 && cam->getPosition().x > -2 && cam->getPosition().y < -7.5) {
+		cam->setPosition(lastPos);
+	}
+
+	//left chair
+	if (cam->getPosition().x > -2 && cam->getPosition().y < -5.5) {
+		cam->setPosition(lastPos);
+	}
+
+	//right chair
+	if (cam->getPosition().x < 2 && cam->getPosition().y < -5.5) {
+		cam->setPosition(lastPos);
+	}
+
 
 	lastPos = cam->getPosition();
 }

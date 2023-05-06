@@ -1,0 +1,28 @@
+newmtl Esprit_3798088b-7772-4288-a0ee-e2de186c327d
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Screenshot_2023-05-05_191954.jpg
+newmtl Frame_81f7e2bc-573b-475e-84e9-3c4a5eeb196d
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Morion.jpg
+newmtl Material #21_3ec9e2e2-e20a-45ca-89fb-047a5f10abc0
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Classic_Handle_albedo.jpg
+newmtl Pano_80212cd9-8072-48d7-9b0a-ae985e640f11
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Verona_PO_Morion_albedo.jpg
+newmtl Glass_d5f23ac1-ca4b-478c-81b8-1ec5e91630ee
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Virazh_02_spec.jpg
+newmtl Metal_cec1d4cd-9ece-4e94-96db-f2277a6acefa
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Classic_Handle_albedo.jpg
+newmtl Material #23_38e2e183-1ba3-4341-8b6d-cfccf490b83c
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Classic_Handle__roughness.jpg
